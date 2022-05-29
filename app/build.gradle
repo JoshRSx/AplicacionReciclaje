@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
 }
+
+//Hola
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
