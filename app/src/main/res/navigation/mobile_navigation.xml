@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/products">
+    <fragment
+        android:id="@+id/products"
+        android:name="com.example.aplicacionreciclaje.Products"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.aplicacionreciclaje.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/soporte"
+        android:name="com.example.aplicacionreciclaje.Soporte"
+        android:label="fragment_soporte"
+        tools:layout="@layout/fragment_soporte" />
+</navigation>
