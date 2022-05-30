@@ -70,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
+
+
             val googleClient = GoogleSignIn.getClient(this, googleConf)
             googleClient.signOut()
 
