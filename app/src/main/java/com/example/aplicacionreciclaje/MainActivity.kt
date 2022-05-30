@@ -1,6 +1,7 @@
 package com.example.aplicacionreciclaje
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -68,9 +69,17 @@ class MainActivity : AppCompatActivity() {
                 //identificar valor de los atributos del usaurio
                 val nomUsuario: String = snapshot.child("nombre").value.toString()
                 val emailUsuario: String = snapshot.child("correo").value.toString()
+                val imgUser: Uri? = FirebaseAuth.getInstance().currentUser?.photoUrl
 
+                navImg.setImageURI(imgUser)
 
-                FirebaseAuth.getInstance().currentUser?.displayName
+                if (FirebaseAuth.getInstance().currentUser?.photoUrl != null) {
+                    Glide.with(baseContext)
+                        .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+                        .into(imgProfile);
+                }
+
+                navNombre.text = FirebaseAuth.getInstance().currentUser?.displayName
 
                 if(FirebaseAuth.getInstance().currentUser?.displayName == null){
                     navNombre.text = nomUsuario
