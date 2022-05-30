@@ -1,4 +1,9 @@
 <resources>
+
+
+    <string name="prefs_file"> com.example.aplicacionreciclaje.PREFERENCE_FILE_KEY</string>
+    <string name="default_web_client" translatable="false">15389052358-4gv0640vbronifukis70ns8ao68e1bmi.apps.googleusercontent.com</string>
+
     <string name="app_name">AplicacionReciclaje</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,4 +17,8 @@
     <string name="menu_slideshow">Slideshow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!---->
+
+
 </resources>

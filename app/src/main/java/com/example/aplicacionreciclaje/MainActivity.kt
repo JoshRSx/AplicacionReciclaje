@@ -1,5 +1,7 @@
 package com.example.aplicacionreciclaje
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -19,6 +21,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.core.Context
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +30,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var navigationView : NavigationView
 
     enum class ProviderType(){
-        BASIC
+        BASIC,
+        GOOGLE
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
+
+
+        //Guardar datos de login
 
 
         navigationView = findViewById(R.id.nav_view)

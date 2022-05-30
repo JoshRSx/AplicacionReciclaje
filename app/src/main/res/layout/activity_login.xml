@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
@@ -12,8 +13,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/icons8_password_24"
-        android:foregroundGravity="left"
         android:drawablePadding="5dp"
+        android:foregroundGravity="left"
         android:hint="  Contraseña"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +27,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:drawableLeft="@drawable/icons8_mail_50"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:foregroundGravity="left"
-        android:drawablePadding="5dp"
-        android:includeFontPadding="true"
-
         android:hint="  Correo"
+
+        android:includeFontPadding="true"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +53,13 @@
         android:id="@+id/txtIniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Registrarme"
         android:textColor="#3F51B5"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="583dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGoogle" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -123,5 +125,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logoprin_app" />
+
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="299dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#FBFBFB"
+        android:drawableStart="@drawable/google_32x33"
+        android:text="Login Google"
+        android:textAllCaps="false"
+        android:textColor="#686363"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInicioSesion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
