@@ -31,7 +31,7 @@ class Products : Fragment() {
         val recyProd = view.findViewById<RecyclerView>(R.id.recyProd)
 
         recyProd.layoutManager = LinearLayoutManager(context)
-        recyProd.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyProd.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
 
         //    llenaItemOfertasVendidas()
@@ -49,7 +49,9 @@ class Products : Fragment() {
 
         itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
         itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
-
+        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
 
 
 

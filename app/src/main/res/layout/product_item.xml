@@ -25,14 +25,14 @@
         android:text="puntos_prod"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.924"
         app:layout_constraintStart_toEndOf="@+id/nombre_prod"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_prod"
-        android:layout_width="138dp"
-        android:layout_height="148dp"
+        android:layout_width="108dp"
+        android:layout_height="138dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="descripcion_prod"
         app:layout_constraintStart_toEndOf="@+id/img_prod"
         app:layout_constraintTop_toBottomOf="@+id/nombre_prod" />
