@@ -50,8 +50,8 @@ class AdpProd (
             holder.puntos.setText(""+itProd.puntosProd)
             holder.img.setImageResource(itProd.imgProd)
             holder.descripcion.setText(itProd.descripcionProd)
-            holder.precioReg.setText(""+itProd.precioRegProd)
-            holder.precioDesc.setText(""+itProd.precioDescProd)
+            holder.precioReg.setText("Precio Reg. S/."+itProd.precioRegProd)
+            holder.precioDesc.setText("Precio Dscto. S/."+itProd.precioDescProd)
 
             holder.itemView.setOnClickListener {
                 itemClick.onItemClickOfe(itProd)

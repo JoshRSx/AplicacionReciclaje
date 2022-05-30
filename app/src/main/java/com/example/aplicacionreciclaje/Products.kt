@@ -18,7 +18,6 @@ class Products : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         var v:View = inflater.inflate(R.layout.fragment_products, container, false)
         return v
@@ -34,8 +33,6 @@ class Products : Fragment() {
         recyProd.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
 
-        //    llenaItemOfertasVendidas()
-
         val adpProd = AdpProd(itemProd, this)
         recyProd?.adapter = adpProd
 
@@ -45,13 +42,19 @@ class Products : Fragment() {
     }
 
 
+
+    //Conectar con mySQL para devolver los productos de la tabLa
+
+    //=nomprod-puntos-descr-urlimg-precioreg-preciodscto
+
+
     fun llenaItemProductos(){
 
-        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
-        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
-        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
-        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
-        itemProd.add(ItemProd("Impresora Epson LX255G","500","AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL/lWJU",R.drawable.user_img2,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.impresora,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.cooler,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G",500, "AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.mochila,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.impresora,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.laptop,79.90, 59.90))
 
 
 

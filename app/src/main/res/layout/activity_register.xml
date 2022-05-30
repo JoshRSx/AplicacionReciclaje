@@ -74,12 +74,13 @@
         android:id="@+id/btnInicioSesion"
         android:layout_width="298dp"
         android:layout_height="57dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="registrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassLogin" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
@@ -136,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="iniciar_sesion"
+        android:text="Iniciar sesión"
         android:textColor="#3F51B5"
 
         android:textSize="16sp"
@@ -161,12 +162,12 @@
         android:id="@+id/imageView12"
         android:layout_width="249dp"
         android:layout_height="135dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="108dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logoprin_app"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/logoprin_app" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

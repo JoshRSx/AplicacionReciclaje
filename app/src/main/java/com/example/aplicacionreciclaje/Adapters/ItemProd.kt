@@ -3,7 +3,7 @@ package com.example.aplicacionreciclaje.Adapters
 class ItemProd {
 
     var nomProd: String = ""
-    var puntosProd: String = ""
+    var puntosProd: Int = 0
     var descripcionProd: String = ""
     var imgProd: Int = 0
 
@@ -13,7 +13,7 @@ class ItemProd {
 
     constructor(
         nomProd: String,
-        puntosProd: String,
+        puntosProd: Int,
         descripcionProd: String,
         imgProd: Int,
         precioRegProd: Double,

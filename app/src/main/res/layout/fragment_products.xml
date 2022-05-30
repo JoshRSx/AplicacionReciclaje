@@ -10,13 +10,13 @@
     <EditText
         android:id="@+id/editTextTextPersonName7"
         android:layout_width="273dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:drawableLeft="@drawable/search_icon"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:foregroundGravity="left"
-        android:drawablePadding="5dp"
         android:hint="Búsqueda de producto..."
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,9 @@
         android:layout_height="491dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView"
@@ -51,8 +53,6 @@
         android:text="Artículos destacados"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyProd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
