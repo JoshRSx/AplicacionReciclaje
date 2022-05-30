@@ -21,7 +21,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.AppReciclaje.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="roundimageview" parent="">
 
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="color">@color/white</item>
+
+
+
+
+    </style>
+
+    <style name="Theme.AppReciclaje.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.AppReciclaje.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
