@@ -26,10 +26,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
-    enum class ProviderType{
-        BASIC,
-        GOOGLE
-    }
+
 
     private val GOOGLE_SIGN_IN = 100
 
@@ -37,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtCorreoLog: EditText
     lateinit var txtPassLog: EditText
     lateinit var irReg: TextView
-    lateinit var btnLogin:Button
-    lateinit var btnG:Button
+    lateinit var btnLogin: Button
+    lateinit var btnG: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,32 +63,16 @@ class LoginActivity : AppCompatActivity() {
         var txtPass: String
 
 
-
-
-        //Guardar datos
-
-        val bundle: Bundle? =  intent.extras
-        val email: String? = bundle?.getString("email")
-        val provider: String? = bundle?.getString("provider")
-
-        val prefs: SharedPreferences.Editor? = getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE).edit()
-        prefs?.putString("email",email)
-        prefs?.putString("provider", provider)
-        prefs?.apply()
-
-
-        //Cerrar Sesion
-        val prefsCerrar: SharedPreferences.Editor? = getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE).edit()
-        prefsCerrar?.clear()
-        prefs?.apply()
-
-        btnG.setOnClickListener{
+        //Btn Google Login
+        btnG.setOnClickListener {
             val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client))
                 .requestEmail()
                 .build()
 
             val googleClient = GoogleSignIn.getClient(this, googleConf)
+            googleClient.signOut()
+
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
         }
@@ -134,51 +115,58 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-        private fun showHome(
-            email: String,
-            provider: MainActivity.ProviderType
-        ) {    //providerType -> Datos al fragment
-            val InicioIntent = Intent(this, MainActivity::class.java).apply {
 
-                putExtra("email", email)
-                putExtra("provider", provider.name)
+    private fun showHome(
+        email: String,
+        provider: MainActivity.ProviderType
+    ) {    //providerType -> Datos al fragment
+        val InicioIntent = Intent(this, MainActivity::class.java).apply {
 
-            }
-            startActivity(InicioIntent)
+            putExtra("email", email)
+            putExtra("provider", provider.name)
 
         }
+        startActivity(InicioIntent)
 
-        fun updateUI(account: FirebaseUser?) {
-            if (account != null) {
-                startActivity(Intent(this, MainActivity::class.java))
+    }
 
-            }
+    fun updateUI(account: FirebaseUser?) {
+        if (account != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+
         }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GOOGLE_SIGN_IN) {
 
+
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val account = task.getResult(ApiException::class.java)
+            try {
+                val account = task.getResult(ApiException::class.java)
 
-            if (account != null) {
-                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                FirebaseAuth.getInstance().signInWithCredential(credential)
-                    .addOnCompleteListener {
+                if (account != null) {
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener {
 
 
-                        if (it.isSuccessful) {
-                            showHome(account.email?: "", MainActivity.ProviderType.GOOGLE)
-                        }else{
-                            Toast.makeText(this,"No funca", Toast.LENGTH_SHORT)
+                            if (it.isSuccessful) {
+                                showHome(account.email ?: "", MainActivity.ProviderType.GOOGLE)
+                            } else {
+                                Toast.makeText(this, "No funca", Toast.LENGTH_SHORT)
+
+                            }
 
                         }
 
-                    }
+                }
+
+            } catch (e: ApiException){
 
             }
         }
-    }
 
     }
+}
