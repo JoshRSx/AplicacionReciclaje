@@ -1,6 +1,7 @@
 package com.example.aplicacionreciclaje
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,20 +22,25 @@ import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.aplicacionreciclaje.databinding.ActivityMainBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_products.*
 import kotlinx.android.synthetic.main.fragment_products.view.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.w3c.dom.Text
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     lateinit var navigationView : NavigationView
+    lateinit var txtLogout: TextView
 
 
     enum class ProviderType(){
@@ -56,8 +64,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        txtLogout = findViewById(R.id.btnLogout)
 
 
+        txtLogout.setOnClickListener {
+
+            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client))
+                .requestEmail()
+                .build()
+
+            val googleClient = GoogleSignIn.getClient(this, googleConf)
+
+            googleClient.signOut().addOnCompleteListener(this) {
+                task->
+
+                if(task.isSuccessful) {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
+                else{
+
+                    Toast.makeText(this, "No puedes cerrar sesion??", Toast.LENGTH_SHORT)
+                }
+
+            }
+
+
+
+            }
 
 
 
@@ -80,15 +114,19 @@ class MainActivity : AppCompatActivity() {
                 //identificar valor de los atributos del usaurio
                 val nomUsuario: String = snapshot.child("nombre").value.toString()
                 val emailUsuario: String = snapshot.child("correo").value.toString()
-                val imgUser: Uri? = FirebaseAuth.getInstance().currentUser?.photoUrl
 
-                navImg.setImageURI(imgUser)
 
-                if (FirebaseAuth.getInstance().currentUser?.photoUrl != null) {
-                    Glide.with(baseContext)
-                        .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
-                        .into(imgProfile);
-                }
+
+//Probar pasando datos desde el Activitylogin... ? o crear nuevo metodo
+          try {
+              Glide.with(baseContext)
+                  .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+                  .into(imgProfile);
+          }catch (e:ApiException){
+
+          }
+
+
 
                 navNombre.text = FirebaseAuth.getInstance().currentUser?.displayName
 

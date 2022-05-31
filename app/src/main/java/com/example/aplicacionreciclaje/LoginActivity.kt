@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.aplicacionreciclaje.R.id.btnGoogle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -73,8 +74,6 @@ class LoginActivity : AppCompatActivity() {
 
 
             val googleClient = GoogleSignIn.getClient(this, googleConf)
-            googleClient.signOut()
-
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
         }
@@ -157,7 +156,7 @@ class LoginActivity : AppCompatActivity() {
                             if (it.isSuccessful) {
                                 showHome(account.email ?: "", MainActivity.ProviderType.GOOGLE)
                             } else {
-                                Toast.makeText(this, "No funca", Toast.LENGTH_SHORT)
+                                Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
 
                             }
 
@@ -166,9 +165,21 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             } catch (e: ApiException){
-
+              showAlert()
             }
         }
 
     }
+
+    fun showAlert(){
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Se ha producido un error autenticando al usuario")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
+    }
+
 }
