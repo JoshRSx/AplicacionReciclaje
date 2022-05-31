@@ -28,6 +28,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="0"
+        android:gravity="center|right"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:drawableEnd="@drawable/img_puntos32px"
+
+    />
+
+
     <include layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

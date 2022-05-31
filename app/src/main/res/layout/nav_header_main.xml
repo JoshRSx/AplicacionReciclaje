@@ -29,7 +29,7 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:src="@drawable/user_img"
-        app:shapeAppearanceOverlay="@style/roundimageview" />
+        app:shapeAppearanceOverlay="@style/circleimageview" />
 
 
     

@@ -7,16 +7,16 @@
     <fragment
         android:id="@+id/products"
         android:name="com.example.aplicacionreciclaje.Products"
-        android:label="fragment_products"
+        android:label="Productos"
         tools:layout="@layout/fragment_products" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.aplicacionreciclaje.MapFragment"
-        android:label="fragment_map"
+        android:label="Map"
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/soporte"
         android:name="com.example.aplicacionreciclaje.Soporte"
-        android:label="fragment_soporte"
+        android:label="Soporte"
         tools:layout="@layout/fragment_soporte" />
 </navigation>
