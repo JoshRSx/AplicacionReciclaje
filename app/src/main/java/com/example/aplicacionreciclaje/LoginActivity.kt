@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.Navigation
 import com.example.aplicacionreciclaje.R.id.btnGoogle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -120,11 +122,14 @@ class LoginActivity : AppCompatActivity() {
     private fun showHome(
         email: String,
         provider: MainActivity.ProviderType
+
+
     ) {    //providerType -> Datos al fragment
         val InicioIntent = Intent(this, MainActivity::class.java).apply {
 
             putExtra("email", email)
             putExtra("provider", provider.name)
+
 
         }
         startActivity(InicioIntent)
@@ -154,14 +159,22 @@ class LoginActivity : AppCompatActivity() {
 
 
                             if (it.isSuccessful) {
+
+                                val ph = FirebaseAuth.getInstance().currentUser?.photoUrl
+
+
+                                var it1: Intent = Intent(this, MainActivity::class.java)
+                                it1.putExtra("uri",ph)
+
+
                                 showHome(account.email ?: "", MainActivity.ProviderType.GOOGLE)
+                                Toast.makeText(this,"Hola: "+ph, Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
 
                             }
 
                         }
-
                 }
 
             } catch (e: ApiException){

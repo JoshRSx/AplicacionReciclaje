@@ -1,18 +1,15 @@
 package com.example.aplicacionreciclaje
 
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,12 +17,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.aplicacionreciclaje.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -33,14 +27,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_products.*
-import kotlinx.android.synthetic.main.fragment_products.view.*
 import kotlinx.android.synthetic.main.nav_header_main.*
-import kotlinx.android.synthetic.main.nav_header_main.view.*
-import org.w3c.dom.Text
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,6 +46,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        val sessionId = this@MainActivity.intent.getStringExtra("uri")
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -76,6 +66,9 @@ class MainActivity : AppCompatActivity() {
 
             val googleClient = GoogleSignIn.getClient(this, googleConf)
 
+            FirebaseAuth.getInstance().signOut()
+
+
             googleClient.signOut().addOnCompleteListener(this) {
                 task->
 
@@ -89,14 +82,14 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-
-
             }
 
 
 
         //Guardar datos de login
 
+
+        val user = FirebaseAuth.getInstance().currentUser
 
         navigationView = findViewById(R.id.nav_view)
         val headerView : View = navigationView.getHeaderView(0)
@@ -110,30 +103,29 @@ class MainActivity : AppCompatActivity() {
             ValueEventListener {
 
 
+
             override fun onDataChange(snapshot: DataSnapshot) {
+
+
                 //identificar valor de los atributos del usaurio
                 val nomUsuario: String = snapshot.child("nombre").value.toString()
                 val emailUsuario: String = snapshot.child("correo").value.toString()
 
+                navNombre.text = user?.displayName
+                navEmail.text =   user?.email
 
 
-//Probar pasando datos desde el Activitylogin... ? o crear nuevo metodo
-          try {
-              Glide.with(baseContext)
-                  .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
-                  .into(imgProfile);
-          }catch (e:ApiException){
+                if(user?.photoUrl != null) {
+                        Glide.with(baseContext)
+                            .load(user.photoUrl)
+                            .into(navImg);
 
-          }
+                }
 
-
-
-                navNombre.text = FirebaseAuth.getInstance().currentUser?.displayName
-
-                if(FirebaseAuth.getInstance().currentUser?.displayName == null){
+                if(user?.displayName == null){
                     navNombre.text = nomUsuario
                 }
-                navEmail.text =   FirebaseAuth.getInstance().currentUser?.email
+
 
 
 
@@ -145,6 +137,9 @@ class MainActivity : AppCompatActivity() {
 
 
         })
+
+
+
 
 
 
