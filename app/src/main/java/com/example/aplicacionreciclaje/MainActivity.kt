@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        val sessionId = this@MainActivity.intent.getStringExtra("uri")
+
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.products, R.id.mapFragment, R.id.soporte
+                R.id.products, R.id.map, R.id.soporte
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

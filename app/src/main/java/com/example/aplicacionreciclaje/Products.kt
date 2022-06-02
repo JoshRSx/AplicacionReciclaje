@@ -55,7 +55,8 @@ class Products : Fragment() {
         itemProd.add(ItemProd("Impresora Epson LX255G",500, "AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.mochila,79.90, 59.90))
         itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.impresora,79.90, 59.90))
         itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.laptop,79.90, 59.90))
-
+        itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.cooler,79.90, 59.90))
+        itemProd.add(ItemProd("Impresora Epson LX255G",500,"AAAAB3NzaC1yc2EAAAADAQABAAABAQDVrIGItx/NtjCGncP/OYglIyb7jL",R.drawable.laptop,79.90, 59.90))
 
 
     }

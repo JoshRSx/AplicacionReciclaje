@@ -165,10 +165,8 @@ class LoginActivity : AppCompatActivity() {
 
                                 var it1: Intent = Intent(this, MainActivity::class.java)
                                 it1.putExtra("uri",ph)
-
-
                                 showHome(account.email ?: "", MainActivity.ProviderType.GOOGLE)
-                                Toast.makeText(this,"Hola: "+ph, Toast.LENGTH_SHORT).show()
+
                             } else {
                                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
 
