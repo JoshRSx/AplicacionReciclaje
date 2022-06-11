@@ -12,8 +12,7 @@
         app:elevation="0dp"
         android:tint="?attr/colorControlNormal"
         android:backgroundTint="@color/white"
-        android:theme="@style/ToolbarColored"
-        >
+        android:theme="@style/ToolbarColored">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

@@ -16,6 +16,10 @@
             android:id="@+id/soporte"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Soporte" />
+        <item
+            android:id="@+id/scanner"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Escanear artículos" />
     </group>
 
 

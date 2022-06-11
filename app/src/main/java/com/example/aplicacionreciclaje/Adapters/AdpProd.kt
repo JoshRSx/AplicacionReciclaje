@@ -1,71 +1,94 @@
 package com.example.aplicacionreciclaje.Adapters
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.aplicacionreciclaje.Products
 import com.example.aplicacionreciclaje.R
-
-class AdpProd (
-
-    private val mlis: ArrayList<ItemProd>,
-    private val itemClick: Products
-
-    ): RecyclerView.Adapter<AdpProd.ViewHolder>() {
-        class ViewHolder(item: View): RecyclerView.ViewHolder(item) {
-
-            //para programar eventos en la seleccion
-            interface  onArteOnClick{
-
-                fun onItemClickOfe(itProd: ItemProd)
-
-
-            }
-
-            //crear var de programa para c/control de la vista
-
-
-            val img = item.findViewById<ImageView>(R.id.img_prod)
-            val nombre = item.findViewById<TextView>(R.id.nombre_prod)
-            val puntos =  item.findViewById<TextView>(R.id.puntos_prod)
-            val descripcion =  item.findViewById<TextView>(R.id.descripcion_prod)
-            val precioReg =  item.findViewById<TextView>(R.id.precioReg_prod)
-            val precioDesc =  item.findViewById<TextView>(R.id.precioDesc_prod)
+class AdpProd (private val mlist: ArrayList<ListaProd>,
+               private val contexto: Context
+): RecyclerView.Adapter<AdpProd.ViewHolder>(){
 
 
 
-        }
+    interface onArteOnclick{
+        //  fun onItemClick(btnNota: ListaProd);
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val vista = LayoutInflater.from(parent.context).inflate(R.layout.product_item,parent,false)
-            return ViewHolder(vista)
-        }
+    }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val itProd: ItemProd = mlis.get(position)
-            holder.nombre.setText(itProd.nomProd)
-            holder.puntos.setText(""+itProd.puntosProd)
-            holder.img.setImageResource(itProd.imgProd)
-            holder.descripcion.setText(itProd.descripcionProd)
-            holder.precioReg.setText("Precio Reg. S/."+itProd.precioRegProd)
-            holder.precioDesc.setText("Precio Dscto. S/."+itProd.precioDescProd)
-
-            holder.itemView.setOnClickListener {
-                itemClick.onItemClickOfe(itProd)
-            }
-
-
-        }
+    // Fotos
+    val urlpic="https://peru-quiosco.000webhostapp.com/fotos/"
 
 
 
 
-        override fun getItemCount(): Int {
-            return mlis.size
-        }
+    class ViewHolder(item : View): RecyclerView.ViewHolder(item) {
+
+        val nom: TextView =item.findViewById(R.id.nombre_prod)
+        val desc: TextView =item.findViewById(R.id.descripcion_prod)
+        val puntos: TextView =item.findViewById(R.id.puntos_prod)
+        val precioreg:TextView =item.findViewById(R.id.precioReg_prod)
+        val preciodesc:TextView =item.findViewById(R.id.precioDesc_prod)
+        val imgProd:ImageView = item.findViewById(R.id.img_prod)
+    }
+
+
+
+
+
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            AdpProd.ViewHolder {
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.product_item,parent,false)
+
+
+
+
+
+
+        return AdpProd.ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: AdpProd.ViewHolder, position: Int) {
+        val p= mlist.get(position)
+
+        holder.nom.setText(""+p.nom)
+        holder.desc.setText(""+p.desc)
+        holder.puntos.setText(""+p.puntos)
+        holder.precioreg.setText("Precio Reg. S/."+p.prereg)
+        holder.preciodesc.setText("Precio Desc. S/."+p.predesc)
+
+
+
+        /*    if(p.prom()>=11.5)
+                holder.tprom.setTextColor(Color.BLUE)
+            else
+                holder.tprom.setTextColor(Color.RED)
+
+ */
+            Glide.with(contexto) //Picasso.with(contexto)
+                .load(urlpic + p.cod + ".jpg") //  .asBitmap()
+                .error(R.drawable.house48px)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .into(holder.imgProd)
+
+
+
+    }
+
+    override fun getItemCount(): Int {
+        return mlist.size
+    }
+
 
 
 }

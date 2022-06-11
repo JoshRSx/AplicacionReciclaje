@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/products"
         android:name="com.example.aplicacionreciclaje.Products"
-        android:label="Productos"
+        android:label="Canjear Productos"
         tools:layout="@layout/fragment_products" />
     <fragment
         android:id="@+id/mapFragment"
@@ -19,4 +19,9 @@
         android:name="com.example.aplicacionreciclaje.Soporte"
         android:label="Soporte"
         tools:layout="@layout/fragment_soporte" />
+    <fragment
+        android:id="@+id/scanner"
+        android:name="com.example.aplicacionreciclaje.Scanner"
+        android:label="Escanear QR"
+        tools:layout="@layout/fragment_scanner" />
 </navigation>

@@ -23,7 +23,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-
+//KOTLIN
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,6 @@ class RegisterActivity : AppCompatActivity() {
         var txtPass: String
 
         //==== Firebase
-
         btnReg.setOnClickListener {
 
             txtNom = nom.text.toString()

@@ -1,5 +1,6 @@
 package com.example.aplicacionreciclaje
 
+import android.graphics.BitmapFactory
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -23,40 +25,47 @@ class MapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
 
 
+        //Coordenada de acercamiento
         map = googleMap
         map.uiSettings.isZoomControlsEnabled = true
         map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(LatLng(-12.031304378464831, -77.04340854273143), 16f)
+            CameraUpdateFactory.newLatLngZoom(LatLng(-12.064215217540083, -77.03741645156602), 16f)
         )
 
 
-        val lider = LatLng(-12.03022002084803, -77.04449888916382)
+        //Puntos de reciclaje
+
+        val ramblaBrasil = LatLng(-12.06602958291968, -77.04760273568611)
         googleMap.addMarker(
             MarkerOptions()
-                .position(lider)
-                .title("Farmacia Lider+")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.iconmarker))  //Icono
+                .position(ramblaBrasil)
+                .title("La Rambla (Av. Brasil)")
         )
 
-        val boticasSalud = LatLng(-12.031937510948149, -77.04325501091448)
+        val realPlazaCentro = LatLng(-12.05641569831374, -77.03745879847507)
         googleMap.addMarker(
             MarkerOptions()
-                .position(boticasSalud)
-                .title("Boticas & Salud+")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.iconmarker))
+                .position(realPlazaCentro)
+                .title("Real Plaza Centro Cívico")
         )
 
-        val inkaFarma = LatLng( -12.033612057084582, -77.04556717637546)
+        val ccPolvosAzules = LatLng( -12.061652450107653, -77.03422441095653)
         googleMap.addMarker(
             MarkerOptions()
-                .position(inkaFarma)
-                .title("Inkafarma")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.iconmarker))
+                .position(ccPolvosAzules)
+                .title("CC. Polvos Azules")
         )
 
 
-        val MiFarma = LatLng( -12.02730025096127, -77.04607932295433)
+        val ccMancoCapac = LatLng( -12.062711928865099, -77.02906325422656)
         googleMap.addMarker(
             MarkerOptions()
-                .position(MiFarma)
-                .title("Mifarma")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.iconmarker))
+                .position(ccMancoCapac)
+                .title("CC. Manco Cápac")
         )
 
     }

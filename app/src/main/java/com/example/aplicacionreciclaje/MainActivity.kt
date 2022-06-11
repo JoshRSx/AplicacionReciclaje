@@ -46,17 +46,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
-
+        //Desactivar modo oscuro
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
 
+
+        //Botón Cerrar Sesión
         txtLogout = findViewById(R.id.btnLogout)
-
-
         txtLogout.setOnClickListener {
 
             val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -67,8 +66,6 @@ class MainActivity : AppCompatActivity() {
             val googleClient = GoogleSignIn.getClient(this, googleConf)
 
             FirebaseAuth.getInstance().signOut()
-
-
             googleClient.signOut().addOnCompleteListener(this) {
                 task->
 
@@ -77,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else{
 
-                    Toast.makeText(this, "No puedes cerrar sesion??", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -86,11 +83,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //Guardar datos de login
-
+        //Colocar datos del usuario en el app.
 
         val user = FirebaseAuth.getInstance().currentUser
-
         navigationView = findViewById(R.id.nav_view)
         val headerView : View = navigationView.getHeaderView(0)
         val navEmail : TextView = headerView.findViewById(R.id.txtCorreoNav)
@@ -98,51 +93,34 @@ class MainActivity : AppCompatActivity() {
         val navImg: ImageView = headerView.findViewById(R.id.imgProfile)
         val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
 
-        //Instancia para encontrar la id del usuario logueado
+        //Instanciar objeto Firebase para encontrar la id del usuario logueado
         FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).addValueEventListener(object :
             ValueEventListener {
-
-
-
             override fun onDataChange(snapshot: DataSnapshot) {
-
 
                 //identificar valor de los atributos del usaurio
                 val nomUsuario: String = snapshot.child("nombre").value.toString()
                 val emailUsuario: String = snapshot.child("correo").value.toString()
 
+                //Colocar nombre del usuario
                 navNombre.text = user?.displayName
+                //Colocar email
                 navEmail.text =   user?.email
 
-
+                //Colocar foto del usuario si es usuario de google
                 if(user?.photoUrl != null) {
                         Glide.with(baseContext)
                             .load(user.photoUrl)
                             .into(navImg);
-
                 }
 
                 if(user?.displayName == null){
                     navNombre.text = nomUsuario
                 }
-
-
-
-
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
-
-
         })
-
-
-
-
-
-
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -151,7 +129,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.products, R.id.map, R.id.soporte
+                R.id.products, R.id.map, R.id.soporte, R.id.scanner
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

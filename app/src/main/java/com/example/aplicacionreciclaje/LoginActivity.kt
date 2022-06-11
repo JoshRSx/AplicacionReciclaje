@@ -65,24 +65,7 @@ class LoginActivity : AppCompatActivity() {
         var txtCorreo: String
         var txtPass: String
 
-
-        //Btn Google Login
-        btnG.setOnClickListener {
-            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client))
-                .requestEmail()
-                .build()
-
-
-
-            val googleClient = GoogleSignIn.getClient(this, googleConf)
-            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
-
-        }
-
-        //
-
-
+        //Boton login normal (correo y contraseña)
         btnLogin.setOnClickListener {
 
             txtCorreo = txtCorreoLog.text.toString()
@@ -98,10 +81,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d(ContentValues.TAG, "Bienvenido!")
                             val user = auth.currentUser   //Obtenemos los datos del usuario
                             updateUI(user)   //Si los datos son correctos se pasa a la siguiente actividad
-                            showHome(
-                                txtCorreo,
-                                MainActivity.ProviderType.BASIC
-                            )  //Datos del usuario al navigarion drawer
+
                         } else {
                             Log.w(ContentValues.TAG, "Error: ", task.exception)
                             Toast.makeText(
@@ -117,24 +97,20 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun showHome(
-        email: String,
-        provider: MainActivity.ProviderType
-
-
-    ) {    //providerType -> Datos al fragment
-        val InicioIntent = Intent(this, MainActivity::class.java).apply {
-
-            putExtra("email", email)
-            putExtra("provider", provider.name)
-
+        //Btn Google Login
+        btnG.setOnClickListener {
+            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client))
+                .requestEmail()
+                .build()
+            val googleClient = GoogleSignIn.getClient(this, googleConf)
+            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
         }
-        startActivity(InicioIntent)
 
     }
+
+
 
     fun updateUI(account: FirebaseUser?) {
         if (account != null) {
@@ -162,10 +138,7 @@ class LoginActivity : AppCompatActivity() {
 
                                 val ph = FirebaseAuth.getInstance().currentUser?.photoUrl
 
-
-                                var it1: Intent = Intent(this, MainActivity::class.java)
-                                it1.putExtra("uri",ph)
-                                showHome(account.email ?: "", MainActivity.ProviderType.GOOGLE)
+                                startActivity(Intent(this, MainActivity::class.java))
 
                             } else {
                                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
