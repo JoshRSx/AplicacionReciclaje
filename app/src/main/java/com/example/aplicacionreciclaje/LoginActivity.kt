@@ -1,10 +1,7 @@
 package com.example.aplicacionreciclaje
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
-import android.content.SharedPreferences
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,14 +10,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.Navigation
-import com.example.aplicacionreciclaje.R.id.btnGoogle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -59,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
         txtCorreoLog = findViewById(R.id.txtCorreoLogin)
         txtPassLog = findViewById(R.id.txtPassLogin)
         btnLogin = findViewById(R.id.btnInicioSesion)
-        btnG = findViewById(R.id.btnGoogle)
+        btnG = findViewById(R.id.btnGoogleReg)
 
 
         var txtCorreo: String
@@ -132,14 +126,10 @@ class LoginActivity : AppCompatActivity() {
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener {
-
-
                             if (it.isSuccessful) {
-
                                 val ph = FirebaseAuth.getInstance().currentUser?.photoUrl
 
                                 startActivity(Intent(this, MainActivity::class.java))
-
                             } else {
                                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
 

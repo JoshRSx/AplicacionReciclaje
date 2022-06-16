@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         navigationView = findViewById(R.id.nav_view)
         val headerView : View = navigationView.getHeaderView(0)
+        val navPuntos : TextView = headerView.findViewById(R.id.nav_puntos)
         val navEmail : TextView = headerView.findViewById(R.id.txtCorreoNav)
         val navNombre: TextView = headerView.findViewById(R.id.txtNombreNav)
         val navImg: ImageView = headerView.findViewById(R.id.imgProfile)
@@ -100,12 +101,15 @@ class MainActivity : AppCompatActivity() {
 
                 //identificar valor de los atributos del usaurio
                 val nomUsuario: String = snapshot.child("nombre").value.toString()
-                val emailUsuario: String = snapshot.child("correo").value.toString()
+                val punUsuario: String = snapshot.child("puntos").value.toString()
+
+
 
                 //Colocar nombre del usuario
                 navNombre.text = user?.displayName
                 //Colocar email
-                navEmail.text =   user?.email
+                navEmail.text =  user?.email
+                navPuntos.text = "Puntos: $punUsuario"
 
                 //Colocar foto del usuario si es usuario de google
                 if(user?.photoUrl != null) {

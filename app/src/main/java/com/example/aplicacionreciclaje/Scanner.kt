@@ -7,16 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.aplicacionreciclaje.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class Scanner : Fragment() {
 
     lateinit var btnScan:Button
-
+    lateinit var navigationView : NavigationView
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +34,8 @@ class Scanner : Fragment() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     */
+
+
     }
 
 
@@ -56,6 +67,8 @@ class Scanner : Fragment() {
     //Recuperar resultado
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
         super.onActivityResult(requestCode, resultCode, data)
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
@@ -67,8 +80,46 @@ class Scanner : Fragment() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
-    }
+
+    //Agregar puntos al usuario según la cantidad de KG
+
+        if(result.contents.equals("https://s.qrfy.mobi/gw4LNBp")){
+
+            Toast.makeText(context, "El valor es reconocido", Toast.LENGTH_SHORT).show()
+
+
+            val user = FirebaseAuth.getInstance().currentUser
+     //       navigationView = view?.findViewById(R.id.nav_view)!!
+
+            //Del firebaseUser.puntos cambiar a +20
+            val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
+            val userPuntos = FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).child("puntos")
 
 
 
+            FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    val punUsuario: String = snapshot.child("puntos").value.toString()
+
+                    val userPuntosInt: Int = punUsuario.toInt()
+
+                    userPuntos.setValue((userPuntosInt+20).toString())
+
+
+                    //Get valor puntos
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+        })
+
+
+        }
+
+}
 }

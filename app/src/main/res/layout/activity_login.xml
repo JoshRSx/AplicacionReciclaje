@@ -64,7 +64,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGoogle" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGoogleReg" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -132,7 +132,7 @@
         app:srcCompat="@drawable/logoprin_app" />
 
     <Button
-        android:id="@+id/btnGoogle"
+        android:id="@+id/btnGoogleReg"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="4dp"

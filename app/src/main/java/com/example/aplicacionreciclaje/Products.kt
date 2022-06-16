@@ -33,10 +33,8 @@ class Products : Fragment() {
     lateinit var btnBusqueda:Button
 
 
-
     val url = "https://peru-quiosco.000webhostapp.com/Controlarec.php"
     var cola: RequestQueue?=null
-
 
 
 
@@ -87,7 +85,7 @@ class Products : Fragment() {
 
     fun llena(prod:String){
 
-        // caso hipotetico prod = apellido
+
 
         val direc = url+"?tag=consultaprod&nom="+prod
         val req = JsonObjectRequest(Request.Method.GET, direc, null, Response.Listener { response ->
