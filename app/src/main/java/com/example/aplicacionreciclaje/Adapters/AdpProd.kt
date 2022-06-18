@@ -1,11 +1,9 @@
 package com.example.aplicacionreciclaje.Adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +12,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.aplicacionreciclaje.Products
 import com.example.aplicacionreciclaje.R
 class AdpProd (private val mlist: ArrayList<ListaProd>,
-               private val contexto: Context
+               private val contexto: Context,
+
+               private val itemClick: Products
 ): RecyclerView.Adapter<AdpProd.ViewHolder>(){
 
 
 
     interface onArteOnclick{
-        //  fun onItemClick(btnNota: ListaProd);
+        fun onItemClickProd(itemProd: ListaProd);
 
     }
 
@@ -81,6 +81,9 @@ class AdpProd (private val mlist: ArrayList<ListaProd>,
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(holder.imgProd)
 
+        holder.itemView.setOnClickListener {
+            itemClick.onItemClickProd(p)
+        }
 
 
     }

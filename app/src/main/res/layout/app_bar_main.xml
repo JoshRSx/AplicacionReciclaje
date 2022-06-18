@@ -18,28 +18,45 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/black"
+            android:background="@color/white"
             android:theme="@style/ToolbarColored"
             android:tint="?attr/colorControlNormal"
-            android:background="@color/white"
+            app:popupTheme="@style/Theme.AppReciclaje.PopupOverlay"
             app:subtitleTextColor="@color/black"
-            app:popupTheme="@style/Theme.AppReciclaje.PopupOverlay" />
+            app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="0"
-        android:gravity="center|right"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:drawableEnd="@drawable/img_puntos32px"
+        android:id="@+id/toolbar_points"
+        android:layout_width="305dp"
+        android:layout_height="53dp"
         android:layout_marginEnd="12dp"
+        android:drawableEnd="@drawable/img_puntos32px"
+        android:gravity="center|right"
+        android:text="0"
+        android:textSize="18dp"
+        android:textStyle="bold"
+
+        />
 
 
-    />
+    <TextView
+        android:id="@+id/toolbar_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:drawableEnd="@drawable/shopping_cart"
+        android:gravity="center|right"
+        android:text="0"
+        android:textSize="18dp"
+        android:textStyle="bold"
+
+
+        />
+
 
 
     <include layout="@layout/content_main" />

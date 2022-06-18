@@ -43,4 +43,11 @@
     <style name="Theme.AppReciclaje.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+<style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+
+    <item name="android:textSize">10sp</item>
+
+</style>
+    
+    
 </resources>

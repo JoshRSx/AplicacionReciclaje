@@ -1,6 +1,7 @@
 package com.example.aplicacionreciclaje
 
 import android.R.id.button1
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -55,10 +56,10 @@ class Products : Fragment() {
         //Definimos variables
         producto = v.findViewById(R.id.txtProducto)
 
-
         var prod: String = ""
         cola = Volley.newRequestQueue(context)
 
+     //   val adpProd = AdpProd(itemProd, requireContext())
 
 
 
@@ -75,6 +76,8 @@ class Products : Fragment() {
 
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -84,8 +87,6 @@ class Products : Fragment() {
     //=nomprod-puntos-descr-urlimg-precioreg-preciodscto
 
     fun llena(prod:String){
-
-
 
         val direc = url+"?tag=consultaprod&nom="+prod
         val req = JsonObjectRequest(Request.Method.GET, direc, null, Response.Listener { response ->
@@ -107,13 +108,14 @@ class Products : Fragment() {
                     a.puntos=fila.getInt("puntos").toInt()
                     a.prereg=fila.getDouble("prereg").toDouble()
                     a.predesc=fila.getDouble("predesc").toDouble()
+            //        a.imgprod = fila.getInt("imgprod").toInt()
 
                     lista.add(a)
 
 
                 }
 
-                val dp= AdpProd(lista, this.requireContext())
+                val dp= AdpProd(lista, this.requireContext(), this)
                 recyProd.layoutManager= LinearLayoutManager(this.requireContext())
                 recyProd.addItemDecoration(DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL))
                 recyProd.adapter=dp
@@ -131,12 +133,18 @@ class Products : Fragment() {
 
         })
         cola?.add(req)
+
     }
 
 
 
-    fun onItemClickOfe(itProd: ItemProd) {
+    fun onItemClickProd(p: ListaProd) {
 
+        var it: Intent = Intent(context, ProductSelect::class.java)
+        it.putExtra("str",p)
+
+
+        startActivity(it)
     }
 
 

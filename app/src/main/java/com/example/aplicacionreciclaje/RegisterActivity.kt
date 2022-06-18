@@ -81,7 +81,8 @@ class RegisterActivity : AppCompatActivity() {
                             map["apellido"] = txtApellido
                             map["correo"] = txtCorreo
                             map["pass"] = txtPass
-                            map["puntos"] = 0.toString()
+                            map["puntos"] = "450"
+                            map["itemsCarrito"] = "0"
 
 
                             //Identificador de usuario
@@ -151,8 +152,8 @@ class RegisterActivity : AppCompatActivity() {
                                 val map = HashMap<String, String>()    //creacion de atributos con los datos del usuario
                                 map["NombreApellido"] = user?.displayName.toString()
                                 map["correo"] = user?.email.toString()
-                                map["puntos"] = 0.toString()
-
+                                map["puntos"] = 450.toString()
+                                map["itemsCarrito"] = "0"
 
                                 //Identificador de usuario
                                 val keys: String = FirebaseDatabase.getInstance().reference.child(FirebaseAuth.getInstance().currentUser!!.uid).key.toString()

@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 
@@ -52,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
+
+
 
 
         //Botón Cerrar Sesión
@@ -102,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                 //identificar valor de los atributos del usaurio
                 val nomUsuario: String = snapshot.child("nombre").value.toString()
                 val punUsuario: String = snapshot.child("puntos").value.toString()
-
+                val itemsCarritoUser = snapshot.child("itemsCarrito").value.toString()
 
 
                 //Colocar nombre del usuario
@@ -110,6 +113,9 @@ class MainActivity : AppCompatActivity() {
                 //Colocar email
                 navEmail.text =  user?.email
                 navPuntos.text = "Puntos: $punUsuario"
+                toolbar_points.setText("$punUsuario")
+                toolbar_car.setText("$itemsCarritoUser")
+
 
                 //Colocar foto del usuario si es usuario de google
                 if(user?.photoUrl != null) {
