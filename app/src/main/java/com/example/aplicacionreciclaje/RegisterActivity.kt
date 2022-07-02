@@ -16,7 +16,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_register.*
-import java.util.*
 import kotlin.collections.HashMap
 
 class RegisterActivity : AppCompatActivity() {
@@ -46,10 +45,10 @@ class RegisterActivity : AppCompatActivity() {
 
 
         //Definimos variables
-        btnReg = findViewById(R.id.btnInicioSesion)
+        btnReg = findViewById(R.id.btnRegistro)
         nom = findViewById(R.id.txtNombre)
-        pass = findViewById(R.id.txtPassLogin)
-        correo = findViewById(R.id.txtCorreoLogin)
+        pass = findViewById(R.id.txtPassRegister)
+        correo = findViewById(R.id.txtCorreoRegister)
         apellido = findViewById(R.id.txtApellido)
         btnG = findViewById(R.id.btnGoogleReg)
 
@@ -71,7 +70,9 @@ class RegisterActivity : AppCompatActivity() {
 
 
             if (txtNom.isNotEmpty() && txtApellido.isNotEmpty() && txtCorreo.isNotEmpty() && txtPass.isNotEmpty()  ) {
-                if (txtPass.length >= 6) {
+
+                //Contraseña mayor a 6 carácteres y una letra en mayúscula
+                if (txtPass.length >= 6 && txtPass.matches(".*[A-Z].*".toRegex()) && txtPass.matches(".*[a-z].*".toRegex()) ) {
 
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(txtCorreo, txtPass)
                         .addOnCompleteListener { task ->
@@ -81,8 +82,9 @@ class RegisterActivity : AppCompatActivity() {
                             map["apellido"] = txtApellido
                             map["correo"] = txtCorreo
                             map["pass"] = txtPass
-                            map["puntos"] = "450"
+                            map["puntos"] = "0"
                             map["itemsCarrito"] = "0"
+                            map["itemsCola"] = ""
 
 
                             //Identificador de usuario
@@ -95,26 +97,21 @@ class RegisterActivity : AppCompatActivity() {
                                             startActivity(Intent(this, LoginActivity::class.java))
                                             Toast.makeText(this, "Registrado!", Toast.LENGTH_LONG).show()
                                             Firebase.auth.currentUser?.sendEmailVerification()   //Manda mensaje de verificacion al correo registrado
-                                            //                            finish()
-
-
                                         } else {
 
                                             Toast.makeText(this, "No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show() }
                                     }
                             } else {
 
-                                Toast.makeText(this, "No se puede registrar a este usuario", Toast.LENGTH_SHORT).show() }
+                                Toast.makeText(this, "El correo no es valido", Toast.LENGTH_SHORT).show() }
                         }
                 } else {
 
-                    Toast.makeText(this, "La contraseña debe tener más de 6 carácteres", Toast.LENGTH_SHORT).show() }
+                    Toast.makeText(this, "La contraseña debe tener más de 6 dígitos y carácteres especiales", Toast.LENGTH_SHORT).show() }
             } else {
 
                 Toast.makeText(this, "Debe de completar todos los campos!", Toast.LENGTH_SHORT).show() }
         }
-
-
 
         //==== Registro Google
         btnG.setOnClickListener {
@@ -152,8 +149,10 @@ class RegisterActivity : AppCompatActivity() {
                                 val map = HashMap<String, String>()    //creacion de atributos con los datos del usuario
                                 map["NombreApellido"] = user?.displayName.toString()
                                 map["correo"] = user?.email.toString()
-                                map["puntos"] = 450.toString()
+                                map["puntos"] = 750.toString()
                                 map["itemsCarrito"] = "0"
+                                map["itemsCola"] = ""
+
 
                                 //Identificador de usuario
                                 val keys: String = FirebaseDatabase.getInstance().reference.child(FirebaseAuth.getInstance().currentUser!!.uid).key.toString()

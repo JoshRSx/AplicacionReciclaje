@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.aplicacionreciclaje.Products
 import com.example.aplicacionreciclaje.R
-class AdpProd (private val mlist: ArrayList<ListaProd>,
-               private val contexto: Context,
+class AdpProd(private val mlist: ArrayList<ListaProd>,
+              private val contexto: Context?,
 
-               private val itemClick: Products
+              private val itemClick: Products
 ): RecyclerView.Adapter<AdpProd.ViewHolder>(){
 
 
@@ -75,11 +75,13 @@ class AdpProd (private val mlist: ArrayList<ListaProd>,
                 holder.tprom.setTextColor(Color.RED)
 
  */
+        if (contexto != null) {
             Glide.with(contexto) //Picasso.with(contexto)
                 .load(urlpic + p.cod + ".jpg") //  .asBitmap()
                 .error(R.drawable.house48px)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(holder.imgProd)
+        }
 
         holder.itemView.setOnClickListener {
             itemClick.onItemClickProd(p)

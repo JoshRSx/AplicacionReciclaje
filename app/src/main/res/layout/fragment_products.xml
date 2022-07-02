@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Products">
+    tools:context=".MainActivity">
 
-
-    <EditText
-        android:id="@+id/txtProducto"
-        android:layout_width="220dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/search_icon"
-        android:drawablePadding="5dp"
-        android:ems="10"
-        android:foregroundGravity="left"
-        android:hint="Búsqueda de producto..."
-        android:inputType="textPersonName"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnBusqueda"
-        android:layout_width="86dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="14dp"
-        android:background="#3EAC5C"
-        android:backgroundTint="#3EAC5C"
-        android:text="Buscar"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyProd"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:tint="?attr/colorControlNormal"
+        android:backgroundTint="@color/white"
+        android:theme="@style/ToolbarColored">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:theme="@style/ToolbarColored"
+            android:tint="?attr/colorControlNormal"
+            app:popupTheme="@style/Theme.AppReciclaje.PopupOverlay"
+            app:subtitleTextColor="@color/black"
+            app:titleTextColor="@color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/art_culos_destacados"
+        android:id="@+id/toolbar_points"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginEnd="12dp"
+        android:drawableEnd="@drawable/img_puntos32px"
+        android:gravity="center|right"
+        android:text="0"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtProducto" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        />
+
+
+    <TextView
+        android:id="@+id/toolbar_car"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginEnd="85dp"
+        android:drawableEnd="@drawable/shopping_cart"
+        android:gravity="center|right"
+        android:text="0"
+        android:textSize="18dp"
+        android:textStyle="bold"
+
+        />
+
+
+    <include layout="@layout/content_main" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

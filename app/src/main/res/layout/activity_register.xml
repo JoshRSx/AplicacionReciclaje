@@ -8,7 +8,7 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/txtPassLogin"
+        android:id="@+id/txtPassRegister"
         android:layout_width="305dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -19,12 +19,13 @@
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:textSize="16sp"
+        android:maxLength="16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCorreoLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCorreoRegister" />
 
     <EditText
-        android:id="@+id/txtCorreoLogin"
+        android:id="@+id/txtCorreoRegister"
         android:layout_width="305dp"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
@@ -34,7 +35,7 @@
         android:foregroundGravity="left"
         android:hint="Correo"
         android:inputType="textEmailAddress"
-
+        android:maxLength="40"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.528"
@@ -49,14 +50,17 @@
         android:autofillHints=""
         android:drawableStart="@drawable/icons8_user_30"
         android:drawablePadding="5dp"
+        android:maxLength="16"
         android:ems="10"
         android:foregroundGravity="left"
         android:hint="Apellido"
-        android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="text"
+        />
 
     <EditText
         android:id="@+id/txtNombre"
@@ -69,14 +73,17 @@
         android:ems="10"
         android:foregroundGravity="left"
         android:hint="Nombre"
-        android:inputType="textPersonName"
+        android:maxLength="16"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:inputType="text"
+        />
 
     <Button
-        android:id="@+id/btnInicioSesion"
+        android:id="@+id/btnRegistro"
         android:layout_width="298dp"
         android:layout_height="57dp"
         android:layout_marginTop="12dp"
@@ -87,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPassRegister" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -140,6 +147,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGoogleReg" />
 
+
     <TextView
         android:id="@+id/txtIniciarSesion"
         android:layout_width="wrap_content"
@@ -150,16 +158,15 @@
 
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:text="Siguenos en"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         tools:text="Siguenos en:" />
@@ -189,7 +196,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnInicioSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegistro" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

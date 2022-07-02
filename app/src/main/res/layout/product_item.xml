@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="nombre_prod"
         android:textSize="13sp"
         android:textStyle="bold"
@@ -20,32 +20,33 @@
 
     <TextView
         android:id="@+id/puntos_prod"
-        android:layout_width="47dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="33dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="2dp"
-        android:text="puntos"
+        android:gravity="center|center_vertical"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_prod"
-        android:layout_width="99dp"
-        android:layout_height="108dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="120dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/descripcion_prod"
-        android:layout_width="240dp"
-        android:layout_height="45dp"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
+
         android:text="descripcion_prod"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,30 +59,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:text="precioReg_prod"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_prod"
-        app:layout_constraintTop_toBottomOf="@+id/descripcion_prod"
-        app:layout_constraintVertical_bias="0.214" />
+        app:layout_constraintTop_toBottomOf="@+id/descripcion_prod" />
 
     <TextView
         android:id="@+id/precioDesc_prod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="16dp"
         android:text="precioDesc_prod"
         android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintStart_toEndOf="@+id/precioReg_prod"
-        app:layout_constraintTop_toBottomOf="@+id/descripcion_prod"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintStart_toEndOf="@+id/img_prod"
+        app:layout_constraintTop_toBottomOf="@+id/precioReg_prod"
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <ImageView
         android:id="@+id/imageView8"
@@ -91,10 +89,10 @@
         android:layout_marginEnd="2dp"
         app:layout_constraintBottom_toTopOf="@+id/descripcion_prod"
         app:layout_constraintEnd_toStartOf="@+id/puntos_prod"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/nombre_prod"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/img_puntos32px" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

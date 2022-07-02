@@ -22,8 +22,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-
         app:headerLayout="@layout/nav_header_main"
+
+
         app:menu="@menu/activity_main_drawer" >
 
         <LinearLayout
@@ -32,6 +33,15 @@
             android:layout_gravity="bottom"
             android:orientation="vertical"
             android:padding="16dp">
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+
+                android:gravity="center|left"
+          android:textColor="@color/Green"
+
+                android:text="_____________________________________" />
 
             <TextView
                 android:id="@+id/btnLogout"

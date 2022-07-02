@@ -11,7 +11,7 @@ open class ItemProd:Serializable {
     var precioRegProd: Double = 0.0
     var precioDescProd: Double = 0.0
 
-    constructor(){}
+    constructor()
 
     constructor(nomProd: String, puntosProd: Int, descripcionProd: String, imgProd: Int, precioRegProd: Double, precioDescProd: Double) {
         this.nomProd = nomProd

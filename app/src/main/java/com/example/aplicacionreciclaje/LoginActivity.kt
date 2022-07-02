@@ -2,7 +2,6 @@ package com.example.aplicacionreciclaje
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -10,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -17,9 +17,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
-
 
 
 class LoginActivity : AppCompatActivity() {
@@ -41,10 +41,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         //===BotonTxt cambiar a interfaz registro
-        txtIniciarSesion.setOnClickListener {
+        txtRegistrarme.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
 
 
 
@@ -117,19 +118,66 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GOOGLE_SIGN_IN) {
 
+            val user = FirebaseAuth.getInstance().currentUser
 
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val isUserRegistered= GoogleSignIn.getLastSignedInAccount(applicationContext)
+
             try {
                 val account = task.getResult(ApiException::class.java)
 
-                if (account != null) {
+                if (user != null && isSignedIn()) {
+                    val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+
+                                startActivity(Intent(this, MainActivity::class.java))
+
+
+
+                            } else {
+                                Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
+
+                            }
+
+                        }
+                }else{
+
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                val ph = FirebaseAuth.getInstance().currentUser?.photoUrl
+                                //    val ph = FirebaseAuth.getInstance().currentUser?.photoUrl
+                                val user = FirebaseAuth.getInstance().currentUser
+                                //Codigo registro Google a Firebase
+                                val map = HashMap<String, String>()    //creacion de atributos con los datos del usuario
+                                map["NombreApellido"] = user?.displayName.toString()
+                                map["correo"] = user?.email.toString()
+                                map["puntos"] = "0"
+                                map["itemsCarrito"] = "0"
+                                map["itemsCola"] = ""
 
-                                startActivity(Intent(this, MainActivity::class.java))
+
+                                //Identificador de usuario
+                                val keys: String = FirebaseDatabase.getInstance().reference.child(FirebaseAuth.getInstance().currentUser!!.uid).key.toString()
+                                if (task.isSuccessful) {
+                                    FirebaseDatabase.getInstance().getReference("Usuarios").child(keys)  //Punto de referencia para id's de los usuario
+                                        .setValue(map)        //Ingreso del hashMap  a  firebase
+                                        .addOnCompleteListener { task2 ->
+                                            if (task2.isSuccessful) {
+                                                startActivity(Intent(this, MainActivity::class.java))
+                                                Toast.makeText(this, "Registrado!", Toast.LENGTH_LONG).show()
+                                                Firebase.auth.currentUser?.sendEmailVerification()   //Manda mensaje de verificacion al correo registrado
+                                                //                            finish()
+
+
+                                            } else {
+
+                                                Toast.makeText(this, "No se pudo crear los datos correctamente", Toast.LENGTH_SHORT).show() }
+                                        }
+                                }
+
                             } else {
                                 Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
 
@@ -137,6 +185,8 @@ class LoginActivity : AppCompatActivity() {
 
                         }
                 }
+
+
 
             } catch (e: ApiException){
               showAlert()
@@ -154,6 +204,10 @@ class LoginActivity : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
 
+    }
+
+    private fun isSignedIn(): Boolean {
+        return GoogleSignIn.getLastSignedInAccount(applicationContext) != null
     }
 
 }

@@ -7,12 +7,13 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
-        android:tint="?attr/colorControlNormal"
         android:backgroundTint="@color/white"
-        android:theme="@style/ToolbarColored">
+        android:theme="@style/ToolbarColored"
+        android:tint="?attr/colorControlNormal"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -27,10 +28,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <TextView
         android:id="@+id/toolbar_points"
-        android:layout_width="305dp"
+        android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_marginEnd="12dp"
         android:drawableEnd="@drawable/img_puntos32px"
@@ -38,25 +38,22 @@
         android:text="0"
         android:textSize="18dp"
         android:textStyle="bold"
-
         />
 
 
     <TextView
         android:id="@+id/toolbar_car"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginEnd="85dp"
         android:drawableEnd="@drawable/shopping_cart"
         android:gravity="center|right"
         android:text="0"
         android:textSize="18dp"
         android:textStyle="bold"
-
-
         />
-
 
 
     <include layout="@layout/content_main" />

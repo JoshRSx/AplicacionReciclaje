@@ -75,7 +75,7 @@ class Scanner : Fragment() {
             if (result.contents == null) {
                 Toast.makeText(this.requireContext(), "Cancelado", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this.requireContext(), "Valor QR: " + result.contents, Toast.LENGTH_LONG).show()
+                Toast.makeText(this.requireContext(), "Codigo Escaneado",Toast.LENGTH_SHORT).show()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -83,10 +83,9 @@ class Scanner : Fragment() {
 
     //Agregar puntos al usuario según la cantidad de KG
 
-        if(result.contents.equals("https://s.qrfy.mobi/gw4LNBp")){
+        if(result.contents.equals("https://s.qrfy.mobi/HUymrBj")){
 
-            Toast.makeText(context, "El valor es reconocido", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(context, "Obtuviste +350 puntos!", Toast.LENGTH_SHORT).show()
 
             val user = FirebaseAuth.getInstance().currentUser
      //       navigationView = view?.findViewById(R.id.nav_view)!!
@@ -94,7 +93,6 @@ class Scanner : Fragment() {
             //Del firebaseUser.puntos cambiar a +20
             val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
             val userPuntos = FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).child("puntos")
-
 
 
             FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).addListenerForSingleValueEvent(object :
@@ -105,7 +103,7 @@ class Scanner : Fragment() {
 
                     val userPuntosInt: Int = punUsuario.toInt()
 
-                    userPuntos.setValue((userPuntosInt+20).toString())
+                    userPuntos.setValue((userPuntosInt+350).toString())
 
 
                     //Get valor puntos
@@ -117,8 +115,40 @@ class Scanner : Fragment() {
                 }
 
         })
+        }
+
+        else if(result.contents.equals("https://s.qrfy.mobi/ofTL4Ya")){
+
+            Toast.makeText(context, "Obtuviste +250 puntos!", Toast.LENGTH_SHORT).show()
+
+            val user = FirebaseAuth.getInstance().currentUser
+            //       navigationView = view?.findViewById(R.id.nav_view)!!
+
+            //Del firebaseUser.puntos cambiar a +20
+            val uid: String = FirebaseAuth.getInstance().currentUser!!.uid
+            val userPuntos = FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).child("puntos")
 
 
+            FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    val punUsuario: String = snapshot.child("puntos").value.toString()
+
+                    val userPuntosInt: Int = punUsuario.toInt()
+
+                    userPuntos.setValue((userPuntosInt+250).toString())
+
+
+                    //Get valor puntos
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
         }
 
 }
